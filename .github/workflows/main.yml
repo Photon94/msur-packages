@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Prepare files
-      run: mkdir dist && cp -r * ./dist
+      run: mkdir dist && cp -r driver crc16 setup.py dist
 
     - name: Publish a Python distribution 📦 to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1

@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from typing import Optional
 from loguru import logger
 from anyio import create_unix_listener
 import socket
@@ -51,7 +50,7 @@ class Client:
             raise ConnectionError(response['error'])
         return p.Telemetry(**json.loads(response['result']))
 
-    def send(self, packet: list[Optional[p.IBase]]):
+    def send(self):
         data = (json.dumps({'command': 1, 'data': {i.__class__.__name__: i.json() for i in packet}}) + '|').encode()
         self._send(data)
 

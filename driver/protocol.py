@@ -369,7 +369,7 @@ class Service:
             to_send = [self.auv[i] for i in self.auv]
         return to_send, not_condition, structure
 
-    async def send(self, package: list[IBase]):
+    async def send(self, package):
         """
         :param package:
         :return:
@@ -391,7 +391,7 @@ class Service:
     }
 
     @staticmethod
-    def get_id(package: list[IBase]) -> int:
+    def get_id(package) -> int:
         return {
             'XThrust': 230, 'YThrust': 230, 'ZThrust': 230, 'AltSet': 230, 'Yaw': 230, 'XVelocity': 230,
             'YVelocity': 230, 'PidStats': 230, 'ExternalDevices': 230, 'NavFlag': 230, 'DepthPidConfig': 110,

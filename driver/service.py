@@ -50,7 +50,7 @@ class Client:
             raise ConnectionError(response['error'])
         return p.Telemetry(**json.loads(response['result']))
 
-    def send(self):
+    def send(self, packet):
         data = (json.dumps({'command': 1, 'data': {i.__class__.__name__: i.json() for i in packet}}) + '|').encode()
         self._send(data)
 

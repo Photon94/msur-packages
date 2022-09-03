@@ -401,7 +401,7 @@ class Service:
 
     async def run_listener(self):
         async with await create_udp_socket(local_host=self.service_address, local_port=self.service_port) as udp:
-            logger.debug('Создан UDP сокет на порту {port}', port=self.service_port)
+            logger.debug('Создан UDP сокет {address}:{port}', address=self.service_address, port=self.service_port)
             async for packet, (host, port) in udp:
                 if len(packet) < 2:
                     continue
@@ -419,17 +419,17 @@ class Service:
             # проверки
             await anyio.sleep(0.1)
             if notification_status == 0:
-                logger.info('Нет подключения к аппарату')
+                logger.info('Нет подключения к аппарату {address}:{port}', address=self.auv_address, port=self.auv_port)
                 notification_status = 1
             if not self.connected:
                 continue
             if notification_status == 1:
-                logger.info('Установлено подключение к аппарату')
+                logger.info('Установлено подключение к аппарату {address}:{port}', address=self.auv_address, port=self.auv_port)
                 notification_status = 2
             # после получения телеметрии создаем сокет для отправки данных
             if self.socket is None:
                 self.socket = await create_connected_udp_socket(remote_host=self.auv_address, remote_port=self.auv_port)
-                logger.debug('Создаем сокет для отправки')
+                logger.debug('Создаем сокет для отправки на {address}:{port}', address=self.auv_address, port=self.auv_port)
 
             # отправляем сообщения на аппарат
             if len(self.buffer) > 0:

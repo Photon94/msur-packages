@@ -2,7 +2,7 @@ from setuptools import Extension, setup
 
 setup(
     name='msur-packages',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Photon94',
     author_email='299792458.photon.94@gmail.com',

@@ -34,6 +34,9 @@ class Client:
             except ConnectionRefusedError:
                 logger.error('Сервис не запущен!')
                 raise NotConnected('Сервис не запущен')
+            except FileNotFoundError:
+                logger.error('Сервис не запущен или не установлен!')
+                raise NotConnected('Сервис не запущен')
             s.sendall(data)
             data = s.recv(1024)
         return data
